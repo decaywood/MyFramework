@@ -1,0 +1,81 @@
+<!--
+DTD是Document Type Definition(文档类型定义)的缩写。它通过定义元素、属性、标记以及文档中的实体及其相互关系等规则来保证XML文档的合法性。
+-->
+
+<!--
+CDATA: 值为字符数据 (character data)
+(en1|en2|..): 此值是枚举列表中的一个值
+
+#REQUIRED   属性值是必需的
+#IMPLIED    属性不是必需的
+#FIXED value    属性值是固定的
+
+PCDATA
+PCDATA 的意思是被解析的字符数据（parsed character data）。
+可把字符数据想象为 XML 元素的开始标签与结束标签之间的文本。
+PCDATA 是会被解析器解析的文本。这些文本将被解析器检查实体以及标记。
+文本中的标签会被当作标记来处理，而实体会被展开。
+不过，被解析的字符数据不应当包含任何 &、< 或者 > 字符；需要使用 &amp;、&lt; 以及 &gt; 实体来分别替换它们。
+CDATA
+CDATA 的意思是字符数据（character data）。
+CDATA 是不会被解析器解析的文本。在这些文本中的标签不会被当作标记来对待，其中的实体也不会被展开。
+
+同元素不出现或者多次出现
+语法格式为:
+<!ELEMENT element-name (child-name*)>
+例:
+<!ELEMENT note (message*)>
+例中的*是指子元素message能够在被包含的note元素里不出现或者出现多次。
+同元素不出现或者出现一次
+语法格式为:
+<!ELEMENT element-name (child-name?)>
+例:
+<!ELEMENT note (message?)>
+例中的?是指子元素message能够在被包含的note元素里不出现或者出现一次。
+
+在 DTD 中，属性通过 ATTLIST 声明来进行声明。
+声明属性
+属性声明拥使用下列语法：
+<!ATTLIST 元素名称 属性名称 属性类型 默认值>
+-->
+<!ELEMENT framework-config (user-config)>
+
+<!ELEMENT user-config (database-info*, relate*, listener*)>
+<!ATTLIST user-config name CDATA #IMPLIED> <!-- the JNDI name -->
+
+<!ELEMENT database-info (#PCDATA)>
+<!ATTLIST database-info name CDATA #REQUIRED>
+
+<!ELEMENT relate EMPTY> <!-- pojo对象映射文件 -->
+<!ATTLIST relate pojo-xml-path CDATA #IMPLIED>
+ 
+<!-- 
+
+<!ELEMENT user-config (database-info*, relate*, (class-cache|collection-cache)*, event*, listener*)>
+
+<!ELEMENT class-cache EMPTY>
+<!ATTLIST class-cache class CDATA #REQUIRED>
+<!ATTLIST class-cache region CDATA #IMPLIED>
+<!ATTLIST class-cache usage (read-only|read-write|nonstrict-read-write|transactional) #REQUIRED>
+<!ATTLIST class-cache include (all|non-lazy) "all">
+
+<!ELEMENT collection-cache EMPTY>
+<!ATTLIST collection-cache collection CDATA #REQUIRED>
+<!ATTLIST collection-cache region CDATA #IMPLIED>
+<!ATTLIST collection-cache usage (read-only|read-write|nonstrict-read-write|transactional) #REQUIRED>
+
+<!ELEMENT event (listener*)>
+<!ATTLIST event type (auto-flush|merge|create|create-onflush|delete|dirty-check|evict|flush|flush-entity|load|load-collection|lock|refresh|replicate|save-update|save|update|pre-load|pre-update|pre-insert|pre-delete|pre-collection-recreate|pre-collection-remove|pre-collection-update|post-load|post-update|post-insert|post-delete|post-collection-recreate|post-collection-remove|post-collection-update|post-commit-update|post-commit-insert|post-commit-delete) #REQUIRED>
+
+<!ELEMENT listener EMPTY>
+<!ATTLIST listener type (auto-flush|merge|create|create-onflush|delete|dirty-check|evict|flush|flush-entity|load|load-collection|lock|refresh|replicate|save-update|save|update|pre-load|pre-update|pre-insert|pre-delete|pre-collection-recreate|pre-collection-remove|pre-collection-update|post-load|post-update|post-insert|post-delete|post-collection-recreate|post-collection-remove|post-collection-update|post-commit-update|post-commit-insert|post-commit-delete) #IMPLIED>
+<!ATTLIST listener class CDATA #REQUIRED>
+
+-->
+
+
+
+ 
+
+
+ 
