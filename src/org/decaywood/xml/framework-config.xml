@@ -1,0 +1,34 @@
+<!--  
+dtd地址必须为绝对路径,默认通过classloader寻找相对地址,若需要通过自定义路径寻找DTD文件,需要重新
+设置Reader的EntityResolver.
+
+ <client-options option="description">description</client-options>
+        <client-options option="minConnectionsPerHost">123</client-options>
+        <client-options option="connectionsPerHost">123</client-options>
+        <client-options option="threadsAllowedToBlockForConnectionMultiplier">12412</client-options>
+        <client-options option="maxWaitTime">2009</client-options>
+        <client-options option="maxConnectionIdleTime">132</client-options>
+        <client-options option="maxConnectionLifeTime">123</client-options>
+        <client-options option="connectTimeout">123</client-options>
+        <client-options option="socketTimeout">12</client-options>
+        <client-options option="autoConnectRetry">autoConnectRetry</client-options>
+        <client-options option="socketKeepAlive">socketKeepAlive</client-options>
+-->
+<!DOCTYPE framework-config SYSTEM "%PROJECT_HOME%/standard/framework-configuration.dtd">
+ 
+<framework-config>
+   <user-config name = "decaywood">
+        <database-info name="databaseName">test</database-info>
+        <database-info name="userName">java</database-info>
+        <database-info name="host">localhost</database-info>
+        <database-info name="port">27017</database-info>
+        <database-info name="password">123456</database-info>
+       
+    </user-config>
+</framework-config>
+
+
+
+
+
+

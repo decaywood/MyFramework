@@ -37,17 +37,49 @@ CDATA 是不会被解析器解析的文本。在这些文本中的标签不会�
 声明属性
 属性声明拥使用下列语法：
 <!ATTLIST 元素名称 属性名称 属性类型 默认值>
+
+
+
+
+ (   description |
+     minConnectionsPerHost | 
+     connectionsPerHost | 
+     threadsAllowedToBlockForConnectionMultiplier |
+     maxWaitTime |
+     maxConnectionIdleTime |
+     maxConnectionLifeTime |
+     connectTimeout |
+     socketTimeout |
+     autoConnectRetry |
+     socketKeepAlive |
+     maxAutoConnectRetryTime |
+     readPreference |
+     dbDecoderFactory |
+     dbEncoderFactory |
+     writeConcern |
+     socketFactory |
+     cursorFinalizerEnabled |
+     alwaysUseMBeans |
+     heartbeatFrequency |
+     minHeartbeatFrequency |
+     heartbeatConnectTimeout |
+     heartbeatSocketTimeout |
+     heartbeatThreadCount |
+     acceptableLatencyDifference | 
+     requiredReplicaSetName )
 -->
 <!ELEMENT framework-config (user-config)>
 
-<!ELEMENT user-config (database-info*, relate*, listener*)>
-<!ATTLIST user-config name CDATA #IMPLIED> <!-- the JNDI name -->
+<!ELEMENT user-config (database-info*,client-options*, cache*, listener*)>
+<!ATTLIST user-config name CDATA #IMPLIED> 
+
+<!ELEMENT client-options (#PCDATA)>  
+<!ATTLIST client-options option CDATA #REQUIRED>
 
 <!ELEMENT database-info (#PCDATA)>
 <!ATTLIST database-info name CDATA #REQUIRED>
 
-<!ELEMENT relate EMPTY> <!-- pojo对象映射文件 -->
-<!ATTLIST relate pojo-xml-path CDATA #IMPLIED>
+
  
 <!-- 
 
