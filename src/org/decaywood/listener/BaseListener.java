@@ -1,5 +1,9 @@
 package org.decaywood.listener;
 
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.logging.Logger;
+
 import org.decaywood.EntityDefinition;
 
 /**
@@ -9,7 +13,21 @@ import org.decaywood.EntityDefinition;
  *
  */
 public class BaseListener implements ListenerDef{
+    
+    protected static final Logger log = Logger.getLogger(BaseListener.class.getName());
+    
 
+    protected List<Field> groupReferenceFields;
+    protected List<Field> referenceFields;
+    
+   
+    public BaseListener() {}
+    
+    public BaseListener(List<Field> groupRefFields, List<Field> refFields){
+        this.groupReferenceFields = groupRefFields;
+        this.referenceFields = refFields;
+    }
+    
     @Override
     public void createAction(EntityDefinition entity) {}
 

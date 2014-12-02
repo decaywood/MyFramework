@@ -79,18 +79,20 @@ public class BasicDao<T> implements DaoDef<T>{
     }
     
     
-    private int getReferenceCascade(Field field){
+    private int getReferenceCascade(Field field, List<Field> fields){
         if(field == null) return Annotations.CASCADE_DEFAULT;
         Reference reference = field.getAnnotation(Reference.class);
         if(reference == null) return Annotations.CASCADE_DEFAULT;
+        fields.add(field);
         return reference.cascade();
     }
     
     
-    private int getGroupReferenceCascade(Field field){
+    private int getGroupReferenceCascade(Field field, List<Field> fields){
         if(field == null) return Annotations.CASCADE_DEFAULT;
         GroupReference reference = field.getAnnotation(GroupReference.class);
         if(reference == null) return Annotations.CASCADE_DEFAULT;
+        fields.add(field);
         return reference.cascade();
     }
     
@@ -98,16 +100,18 @@ public class BasicDao<T> implements DaoDef<T>{
     private void processListener(){
         Field[] fields = FieldsPool.getInstance().get(clazz);
         int listenerBit = Annotations.CASCADE_DEFAULT;
+        List<Field> groupRefFields = new ArrayList<Field>();
+        List<Field> refFields = new ArrayList<Field>();
         for(Field field : fields){
-            if((listenerBit & 0x1111) == 0x1111) break;
-            int refCascade = getReferenceCascade(field);
-            int groupRefCascade = getGroupReferenceCascade(field);
+//            if((listenerBit & 0x1111) == 0x1111) break;
+            int refCascade = getReferenceCascade(field, refFields);
+            int groupRefCascade = getGroupReferenceCascade(field, groupRefFields);
             listenerBit |= refCascade | groupRefCascade;
         }
         if((listenerBit & Annotations.CASCADE_CREATE) != 0)
             addListener(new CreateListener());
         if((listenerBit & Annotations.CASCADE_DELETE) != 0)
-            addListener(new DeleteListener());
+            addListener(new DeleteListener(groupRefFields, refFields));
         if((listenerBit & Annotations.CASCADE_UPDATE) != 0)
             addListener(new UpdateListener());
         if((listenerBit & Annotations.CASCADE_RETRIEVE) != 0)
