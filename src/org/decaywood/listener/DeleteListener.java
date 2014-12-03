@@ -14,7 +14,7 @@ import org.decaywood.EntityDefinition;
 import org.decaywood.MongoDBconstant;
 import org.decaywood.annotations.GroupReference;
 import org.decaywood.annotations.Reference;
-import org.decaywood.cache.DaosPool;
+import org.decaywood.cache.DaosCache;
 import org.decaywood.dao.ToolDao;
 import org.decaywood.query.IQuery;
 
@@ -76,7 +76,7 @@ public class DeleteListener extends BaseListener{
         
         if(IDs == null) return;
         
-        ToolDao dao = DaosPool.getInstance().get(componentClass);
+        ToolDao dao = DaosCache.getInstance().get(componentClass);
         IQuery query = dao.query().in(MongoDBconstant.ID, IDs);
         dao.deleteData(query);
         
@@ -120,7 +120,7 @@ public class DeleteListener extends BaseListener{
             Class<?> fieldClass = field.getType();
             Reference annotation = field.getAnnotation(Reference.class);
             fieldClass = getImplementClass(annotation, fieldClass);
-            ToolDao<Object> dao = DaosPool.getInstance().get(fieldClass);
+            ToolDao<Object> dao = DaosCache.getInstance().get(fieldClass);
             dao.deleteData(value);
         }
     }

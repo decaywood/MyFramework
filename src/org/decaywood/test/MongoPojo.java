@@ -12,7 +12,7 @@ import org.decaywood.annotations.Entity;
 import org.decaywood.annotations.GroupEmbed;
 import org.decaywood.annotations.GroupReference;
 import org.decaywood.annotations.ID;
-import org.decaywood.cache.DaosPool;
+import org.decaywood.cache.DaosCache;
 import org.decaywood.dao.BasicDao;
 import org.decaywood.dao.ToolDao;
 import org.decaywood.resolver.decoder.DefaultDecoder;
@@ -54,8 +54,8 @@ public class MongoPojo implements EntityDefinition{
     public static void main(String[] args) {
         MongoConnection connection = MongoConnection.getInstance();
         connection.startConnect();
-        DaosPool<MongoPojo> pool = DaosPool.getInstance();
-        ToolDao<MongoPojo> dao = pool.get(MongoPojo.class);
+        DaosCache<MongoPojo> cache = DaosCache.getInstance();
+        ToolDao<MongoPojo> dao = cache.get(MongoPojo.class);
         WriteResult result = dao.createData(new MongoPojo());
         Object object = result.getUpsertedId();
         MongoPojo pojo = dao.findOne("546f56c9deddd8e0ad4ea16e");

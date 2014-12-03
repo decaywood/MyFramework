@@ -73,6 +73,10 @@ CDATA 是不会被解析器解析的文本。在这些文本中的标签不会�
 <!ELEMENT user-config (database-info*,client-options*, cache*, listener*)>
 <!ATTLIST user-config name CDATA #IMPLIED> 
 
+<!ELEMENT cache (#PCDATA)>  
+<!ATTLIST cache type CDATA #REQUIRED>
+<!ATTLIST cache cache-size CDATA #IMPLIED>
+
 <!ELEMENT client-options (#PCDATA)>  
 <!ATTLIST client-options option CDATA #REQUIRED>
 

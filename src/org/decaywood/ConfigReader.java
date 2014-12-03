@@ -7,7 +7,18 @@ import java.util.logging.Logger;
 
 import javax.net.SocketFactory;
 
-import org.decaywood.cache.ConstructorsPool;
+import org.decaywood.cache.ConcurrentConstructorsCache;
+import org.decaywood.cache.ConcurrentDaosCache;
+import org.decaywood.cache.ConcurrentFieldsCache;
+import org.decaywood.cache.ConstructorsCache;
+import org.decaywood.cache.ConstructorsCache.ConstructorsCacheDefinition;
+import org.decaywood.cache.DaosCache;
+import org.decaywood.cache.DaosCache.DaosCacheDefinition;
+import org.decaywood.cache.FieldsCache;
+import org.decaywood.cache.FieldsCache.FieldsCacheDefinition;
+import org.decaywood.cache.LRUConstructorsCache;
+import org.decaywood.cache.LRUDaosCache;
+import org.decaywood.cache.LRUFieldsCache;
 import org.decaywood.utils.ConfigureUtil;
 import org.decaywood.utils.ReaderCreater;
 import org.decaywood.utils.ReflectUtil;
@@ -76,6 +87,7 @@ public class ConfigReader {
         
         processDatabaseInfo(userConfig, userName);
         processOptions(userConfig, userName);
+        processFrameworkConfig(userConfig, userName);
         
         if(log != null)
             log.info(" Configured SessionFactory: " + userName);
@@ -126,6 +138,86 @@ public class ConfigReader {
         
         setOptions();
     }
+    
+    private void processFrameworkConfig(Element element, String name){
+        
+        Iterator<?> elements = element.elementIterator(GlobalName.CACHE.toString());
+        boolean noUserDefine = true;
+        
+        while (elements.hasNext()) {
+            
+            noUserDefine = false;
+            Element cache = (Element)elements.next();
+            
+            String typeName = cache.attributeValue(GlobalName.CACHE_TYPE.toString());
+            String size = cache.attributeValue(GlobalName.CACHE_SIZE.toString());
+            
+            GlobalName globalName = GlobalName.getGlobalName(typeName);
+            String value = cache.getText().trim();
+            
+            if(log != null)
+                log.info("cache" + " -> " + value);
+            
+            infoMap.put(globalName, value);
+            
+            int cacheSize = size != null ? Integer.parseInt(size) : 100;
+            cacheInitate(cacheSize);
+        }
+        
+    }
+    
+    private void cacheInitate(int cacheSize){
+        
+        if(checkNull(GlobalName.CACHE_TYPE_CONSTRUCTORS_CACHE))
+            if(ConstructorsCache.getInstance().isEmpty())
+                setConstructorsCache(cacheSize);
+        if(checkNull(GlobalName.CACHE_TYPE_DAOS_CACHE))
+            if(DaosCache.getInstance().isEmpty())
+                setDaosCache(cacheSize);
+        if(checkNull(GlobalName.CACHE_TYPE_FIELDS_CACHE))
+            if(FieldsCache.getInstance().isEmpty())
+                setFieldsCache(cacheSize);
+        
+    }
+    
+    private void setConstructorsCache(int cacheSize){
+        
+        String type = getInfo(GlobalName.CACHE_TYPE_CONSTRUCTORS_CACHE);
+        type = type.toUpperCase();
+        ConstructorsCacheDefinition cache = null;
+        switch (type) {
+            case "LRU": cache = new LRUConstructorsCache(cacheSize); break;
+            case "CONCURRENT": cache = new ConcurrentConstructorsCache(); break;
+            default: cache = new LRUConstructorsCache(cacheSize); break;
+        }
+        ConstructorsCache.getInstance().initiate(cache);
+    }
+    
+   private void setDaosCache(int cacheSize){
+        
+        String type = getInfo(GlobalName.CACHE_TYPE_DAOS_CACHE);
+        type = type.toUpperCase();
+        DaosCacheDefinition cache = null;
+        switch (type) {
+            case "LRU": cache = new LRUDaosCache(cacheSize); break;
+            case "CONCURRENT": cache = new ConcurrentDaosCache(); break;
+            default: cache = new LRUDaosCache(cacheSize); break;
+        }
+        DaosCache.getInstance().initiate(cache);
+    }
+   
+   private void setFieldsCache(int cacheSize){
+       
+       String type = getInfo(GlobalName.CACHE_TYPE_FIELDS_CACHE);
+       type = type.toUpperCase(); 
+       FieldsCacheDefinition cache = null;
+       switch (type) {
+           case "LRU": cache = new LRUFieldsCache(cacheSize); break;
+           case "CONCURRENT": cache = new ConcurrentFieldsCache(); break;
+           default: cache = new LRUFieldsCache(cacheSize); break;
+       }
+       FieldsCache.getInstance().initiate(cache);
+   }
     
     /**
      * 2014年11月17日
@@ -302,7 +394,7 @@ public class ConfigReader {
             try {
                 Class<?> clazz = ReflectUtil.classForName(factoryName, this.getClass());
                 if(DBEncoderFactory.class.isAssignableFrom(clazz))
-                    builder.dbEncoderFactory((DBEncoderFactory) ConstructorsPool.getInstance().get(clazz).newInstance());
+                    builder.dbEncoderFactory((DBEncoderFactory) ConstructorsCache.getInstance().get(clazz).newInstance());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -321,7 +413,7 @@ public class ConfigReader {
             try {
                 Class<?> clazz = ReflectUtil.classForName(factoryName, this.getClass());
                 if(DBDecoderFactory.class.isAssignableFrom(clazz))
-                    builder.dbDecoderFactory((DBDecoderFactory) ConstructorsPool.getInstance().get(clazz).newInstance());
+                    builder.dbDecoderFactory((DBDecoderFactory) ConstructorsCache.getInstance().get(clazz).newInstance());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -352,7 +444,7 @@ public class ConfigReader {
             try {
                 Class<?> clazz = ReflectUtil.classForName(preferenceName, this.getClass());
                 if(ReadPreference.class.isAssignableFrom(clazz))
-                    builder.readPreference((ReadPreference) ConstructorsPool.getInstance().get(clazz).newInstance());
+                    builder.readPreference((ReadPreference) ConstructorsCache.getInstance().get(clazz).newInstance());
             } catch (Exception e) {
                 e.printStackTrace();
             }

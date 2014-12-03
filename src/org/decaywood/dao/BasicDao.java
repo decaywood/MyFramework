@@ -15,7 +15,7 @@ import org.decaywood.annotations.GroupReference;
 import org.decaywood.annotations.ID;
 import org.decaywood.annotations.Reference;
 import org.decaywood.annotations.Split;
-import org.decaywood.cache.FieldsPool;
+import org.decaywood.cache.FieldsCache;
 import org.decaywood.listener.CreateListener;
 import org.decaywood.listener.DeleteListener;
 import org.decaywood.listener.ListenerDef;
@@ -98,7 +98,7 @@ public class BasicDao<T> implements DaoDef<T>{
     
     
     private void processListener(){
-        Field[] fields = FieldsPool.getInstance().get(clazz);
+        Field[] fields = FieldsCache.getInstance().get(clazz);
         int listenerBit = Annotations.CASCADE_DEFAULT;
         List<Field> groupRefFields = new ArrayList<Field>();
         List<Field> refFields = new ArrayList<Field>();
@@ -301,7 +301,7 @@ public class BasicDao<T> implements DaoDef<T>{
     private ID getIDAnnotation(){
         Field idField = null;
         try {
-            idField = FieldsPool.getInstance().getIdField(clazz);
+            idField = FieldsCache.getInstance().getIdField(clazz);
         } catch (Exception e) {
             log.info(e.getMessage());
         }
@@ -340,8 +340,8 @@ public class BasicDao<T> implements DaoDef<T>{
             EntityDefinition be = (EntityDefinition)value;
             return AccessUtil.convertToDbReference(clazz, key, be.getClass(), be.getID());
         }
-        FieldsPool fieldsPool = FieldsPool.getInstance();
-        if(!(value instanceof DBObject) && fieldsPool.isEmbedOrGroupEmbeded(clazz, key)){
+        FieldsCache fieldsCache = FieldsCache.getInstance();
+        if(!(value instanceof DBObject) && fieldsCache.isEmbedOrGroupEmbeded(clazz, key)){
             return MappingUtil.toDBObject(value);
         }
         return value;

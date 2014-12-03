@@ -16,32 +16,41 @@ import org.decaywood.annotations.Reference;
  * @author decaywood
  *
  */
-public class FieldsPool {
+public class FieldsCache<T> {
     
-    private final static Logger logger = Logger.getLogger(FieldsPool.class.getName());
+    private final static Logger logger = Logger.getLogger(FieldsCache.class.getName());
 
-    private FieldsPoolDefinition cache;
+    private FieldsCacheDefinition<T> cache;
     
-    public static interface FieldsPoolDefinition{
+    public static interface FieldsCacheDefinition<E>{
         
-        public Field[] get(Class clazz);
+        public Field[] get(Class<E> clazz);
         
     }
     
     private static class InnerClass {
-        final static FieldsPool instance = new FieldsPool();
+        final static FieldsCache instance = new FieldsCache();
     } 
     
-    public static FieldsPool getInstance(){
+    public static FieldsCache getInstance(){
         return InnerClass.instance;
     }
     
-    public Field[] get(Class clazz){
+    public boolean isEmpty(){
+        return cache == null;
+    }
+    
+    public void initiate(FieldsCacheDefinition cache){
+        if(this.cache != null)  return;
+        this.cache = cache;
+    }
+    
+    public Field[] get(Class<T> clazz){
         return cache.get(clazz);
     }
     
     
-    public Field getIdField(Class<?> clazz) throws Exception {
+    public Field getIdField(Class<T> clazz) throws Exception {
         Field result = null;
         Field[] fields = cache.get(clazz);
         for(Field f : fields){
@@ -57,7 +66,7 @@ public class FieldsPool {
     }
     
      
-    public String getIdFieldName(Class<?> clazz){
+    public String getIdFieldName(Class<T> clazz){
         String name = null;
         Field f = null;
         try{
@@ -72,7 +81,7 @@ public class FieldsPool {
     }
    
     
-    public Field getField(Class<?> clazz, String fieldName) throws Exception {
+    public Field getField(Class<T> clazz, String fieldName) throws Exception {
         Field field = null;
         Field[] fields = cache.get(clazz);
         for(Field f : fields){
@@ -117,7 +126,7 @@ public class FieldsPool {
     }
     
     
-    public boolean isEmbedOrGroupEmbeded(Class<?> clazz, String fieldName){
+    public boolean isEmbedOrGroupEmbeded(Class<T> clazz, String fieldName){
         Field[] fields = cache.get(clazz);
         for(Field field : fields){
             if(isEmbed(field, fieldName) || isGroupEmbed(field, fieldName)){
@@ -127,7 +136,7 @@ public class FieldsPool {
         return false;
     }
     
-    public boolean isEmbedField(Class<?> clazz, String fieldName){
+    public boolean isEmbedField(Class<T> clazz, String fieldName){
         Field[] fields = cache.get(clazz);
         for(Field field : fields){
             if(isEmbed(field, fieldName)){
@@ -138,7 +147,7 @@ public class FieldsPool {
     }
     
     
-    public boolean isGroupEmbedField(Class<?> clazz, String fieldName){
+    public boolean isGroupEmbedField(Class<T> clazz, String fieldName){
         Field[] fields = cache.get(clazz);
         for(Field field : fields){
             if(isGroupEmbed(field, fieldName)){

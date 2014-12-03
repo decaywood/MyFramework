@@ -12,8 +12,8 @@ import org.decaywood.annotations.Embed;
 import org.decaywood.annotations.GroupEmbed;
 import org.decaywood.annotations.Entity;
 import org.decaywood.annotations.Property;
-import org.decaywood.cache.ConstructorsPool;
-import org.decaywood.cache.FieldsPool;
+import org.decaywood.cache.ConstructorsCache;
+import org.decaywood.cache.FieldsCache;
 import org.decaywood.resolver.DecodeManager;
 import org.decaywood.resolver.EncodeManager;
 import org.decaywood.resolver.decoder.AbstractDecoder;
@@ -39,9 +39,9 @@ public class MappingUtil<T> {
             if(dbObject == null) return null;
             DecodeManager manager = new DecodeManager();
             boolean isBasic = BasicTypeChecker.getInstance().isBasicType(clazz);
-            T object = (T) (isBasic ? dbObject.get("value") : ConstructorsPool.getInstance().get(clazz).newInstance());
+            T object = (T) (isBasic ? dbObject.get("value") : ConstructorsCache.getInstance().get(clazz).newInstance());
             if(isBasic) return object;
-            Field[] fields = FieldsPool.getInstance().get(clazz);
+            Field[] fields = FieldsCache.getInstance().get(clazz);
             for(Field field : fields){
                 AbstractDecoder decoder = manager.initDecoder(field, dbObject);
                 if(decoder!=null && !decoder.isEmpty()){
@@ -60,7 +60,7 @@ public class MappingUtil<T> {
         if(object == null) return null;
         EncodeManager manager = new EncodeManager();
         Class<?> clazz = object.getClass();
-        Field[] fields = FieldsPool.getInstance().get(clazz);
+        Field[] fields = FieldsCache.getInstance().get(clazz);
         DBObject dbo = new BasicDBObject();
         for(Field field : fields){
             AbstractEncoder encoder = manager.initEncoder(field, object);
@@ -85,7 +85,7 @@ public class MappingUtil<T> {
     public static <T> Collection<T> toRealCollection(Class<T> clazz, DBCursor cursor, Class<?> implementClass){
         Collection<T> collection = null;
         try {
-            collection = (Collection<T>) ConstructorsPool.getInstance().get(implementClass).newInstance();
+            collection = (Collection<T>) ConstructorsCache.getInstance().get(implementClass).newInstance();
             while(cursor.hasNext()){
                 DBObject dbo = cursor.next();
                 collection.add(fromDBObject(clazz, dbo));
@@ -166,7 +166,7 @@ public class MappingUtil<T> {
   
     public static DBObject getKeyFields(Class<?> clazz){
         DBObject keys = new BasicDBObject();
-        Field[] fields = FieldsPool.getInstance().get(clazz);
+        Field[] fields = FieldsCache.getInstance().get(clazz);
         for(Field field : fields){
             String fieldName = field.getName();
             Property property = field.getAnnotation(Property.class);

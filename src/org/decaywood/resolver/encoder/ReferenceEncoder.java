@@ -3,7 +3,7 @@ package org.decaywood.resolver.encoder;
 import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.annotations.Reference;
-import org.decaywood.cache.DaosPool;
+import org.decaywood.cache.DaosCache;
 import org.decaywood.dao.BasicDao;
 import org.decaywood.utils.AccessUtil;
 
@@ -41,7 +41,7 @@ public class ReferenceEncoder extends AbstractEncoder {
         boolean isUpdate = (cascade & Annotations.CASCADE_UPDATE) != 0;
         if(isCreate && isUpdate){
             clazz = getImplementClass(annotation);
-            BasicDao dao = DaosPool.getInstance().get(clazz);
+            BasicDao dao = DaosCache.getInstance().get(clazz);
             dao.updateData(entity);
         }
         return AccessUtil.convertToDbReference(annotation, clazz, entity.getID());

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import org.decaywood.EntityDefinition;
 import org.decaywood.MongoDBconstant;
 import org.decaywood.annotations.ID;
-import org.decaywood.cache.FieldsPool;
+import org.decaywood.cache.FieldsCache;
 import org.decaywood.dao.BasicDao;
 import org.decaywood.utils.AccessUtil;
 import org.decaywood.utils.MappingUtil;
@@ -404,7 +404,7 @@ public class Query<T> implements IQuery<T> {
         if(idAnnotation == null){
             Field idField = null;
             try {
-                idField = FieldsPool.getInstance().getIdField(dao.getEntityClass());
+                idField = FieldsCache.getInstance().getIdField(dao.getEntityClass());
                 idAnnotation = idField.getAnnotation(ID.class);
             } catch (Exception e) {
                 log.info(e.getMessage());
@@ -430,7 +430,7 @@ public class Query<T> implements IQuery<T> {
         else{
             Field field = null;
             try{
-                field = FieldsPool.getInstance().getField(clazz, key);
+                field = FieldsCache.getInstance().getField(clazz, key);
             }catch(Exception e){
                 log.info(e.getMessage());
             }
@@ -461,7 +461,7 @@ public class Query<T> implements IQuery<T> {
         else{
             Field field = null;
             try{
-                field = FieldsPool.getInstance().getField(clazz, key);
+                field = FieldsCache.getInstance().getField(clazz, key);
             }catch(Exception e){
                 log.info(e.getMessage());
             }
@@ -486,7 +486,7 @@ public class Query<T> implements IQuery<T> {
             Field field = null;
             try{
                 Class<T> clazz = dao.getEntityClass();
-                field = FieldsPool.getInstance().getField(clazz, key);
+                field = FieldsCache.getInstance().getField(clazz, key);
             }catch(Exception e){
                 log.info(e.getMessage());
             }

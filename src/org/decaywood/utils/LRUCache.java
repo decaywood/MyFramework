@@ -79,9 +79,8 @@ public class LRUCache<K, V> {
     }  
       
     
-    public synchronized void put (K key, V value) {  
-       map.put (key, value); 
-       
+    public synchronized V put (K key, V value) {  
+       return map.put (key, value); 
     }  
       
    

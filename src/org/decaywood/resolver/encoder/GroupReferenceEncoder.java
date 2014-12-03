@@ -10,7 +10,7 @@ import java.util.Map;
 import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.annotations.GroupReference;
-import org.decaywood.cache.DaosPool;
+import org.decaywood.cache.DaosCache;
 import org.decaywood.dao.BasicDao;
 import org.decaywood.utils.AccessUtil;
 import org.decaywood.utils.MappingUtil;
@@ -51,7 +51,7 @@ public class GroupReferenceEncoder extends AbstractGroupEncoder {
         GroupReference annotation = field.getAnnotation(GroupReference.class);
         List<Object> result = new ArrayList<Object>();
         componentType = getImplementClass(componentType, annotation);
-        BasicDao dao = DaosPool.getInstance().get(componentType);
+        BasicDao dao = DaosCache.getInstance().get(componentType);
         int len = Array.getLength(value);
         for(int index = 0; index < len; index++){
             EntityDefinition entity = (EntityDefinition) Array.get(value, index);

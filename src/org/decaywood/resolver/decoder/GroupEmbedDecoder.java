@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 import org.decaywood.Annotations;
 import org.decaywood.annotations.GroupEmbed;
-import org.decaywood.cache.ConstructorsPool;
+import org.decaywood.cache.ConstructorsCache;
 import org.decaywood.utils.MappingUtil;
 
 import com.mongodb.DBObject;
@@ -49,7 +49,7 @@ public class GroupEmbedDecoder extends AbstractGroupDecoder{
         try {
            
             Collection<?> collection = (Collection<?>)value;
-            Collection<Object> result = (Collection<Object>) ConstructorsPool.getInstance().get(getCollectionImplementClass()).newInstance();
+            Collection<Object> result = (Collection<Object>) ConstructorsCache.getInstance().get(getCollectionImplementClass()).newInstance();
             for(Object item : collection){
                 item = item != null ? MappingUtil.fromDBObject(componentClass, (DBObject)item) : null;
                 result.add(item);
@@ -66,7 +66,7 @@ public class GroupEmbedDecoder extends AbstractGroupDecoder{
     protected Object decodeMap(Class<?> keyClass, Class<?> valueClass){
         try {
             Map<?, ?> map = (Map<?, ?>)value;
-            Map<Object, Object> result = (Map<Object, Object>) ConstructorsPool.getInstance().get(getMapImplementClass()).newInstance();
+            Map<Object, Object> result = (Map<Object, Object>) ConstructorsCache.getInstance().get(getMapImplementClass()).newInstance();
             for(Object key : map.keySet()){
                 Object val = map.get(key);
                 Object resultKey = MappingUtil.fromDBObject(keyClass, (DBObject)key);

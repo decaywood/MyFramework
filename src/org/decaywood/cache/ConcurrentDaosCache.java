@@ -4,7 +4,6 @@ import java.lang.ref.SoftReference;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.decaywood.cache.DaosPool.DaosPoolDefinition;
 import org.decaywood.dao.ToolDao;
 
 /**
@@ -12,13 +11,13 @@ import org.decaywood.dao.ToolDao;
  * @author decaywood
  *
  */
-public class ConcurrentDaosPool<T> implements DaosPool.DaosPoolDefinition{
+public class ConcurrentDaosCache<T> implements DaosCache.DaosCacheDefinition<T>{
 
     
-    private final ConcurrentMap<String, SoftReference<ToolDao<?>>> cache;
+    private final ConcurrentMap<String, SoftReference<ToolDao<T>>> cache;
     
-    private ConcurrentDaosPool(){
-        cache = new ConcurrentHashMap<String, SoftReference<ToolDao<?>>>();
+    public ConcurrentDaosCache(){
+        cache = new ConcurrentHashMap<String, SoftReference<ToolDao<T>>>();
     }
 
     /**
@@ -27,14 +26,14 @@ public class ConcurrentDaosPool<T> implements DaosPool.DaosPoolDefinition{
      *
      */ 
     @Override
-    public ToolDao get(Class clazz) {
+    public ToolDao<T> get(Class<T> clazz) {
         String name = clazz.getName();
-        SoftReference<ToolDao<?>> softReference = cache.get(name);
+        SoftReference<ToolDao<T>> softReference = cache.get(name);
         if(softReference != null)
             return (ToolDao<T>)softReference.get();
-        ToolDao<?> dao = new ToolDao<>(clazz);
-        softReference = new SoftReference<ToolDao<?>>(dao);
-        SoftReference<ToolDao<?>> temp = cache.putIfAbsent(name, softReference);
+        ToolDao<T> dao = new ToolDao<>(clazz);
+        softReference = new SoftReference<ToolDao<T>>(dao);
+        SoftReference<ToolDao<T>> temp = cache.putIfAbsent(name, softReference);
         return (ToolDao<T>) (temp != null ? temp.get() : softReference.get()); 
     }
 

@@ -15,15 +15,15 @@ import java.util.logging.Logger;
  * @author decaywood
  *
  */
-public class ConcurrentConstructorsPool<T> implements ConstructorsPool.ConstructorsPoolDefinition{
+public class ConcurrentConstructorsCache<T> implements ConstructorsCache.ConstructorsCacheDefinition{
     
-    private final static Logger log = Logger.getLogger(ConcurrentConstructorsPool.class.getName());
+    private final static Logger log = Logger.getLogger(ConcurrentConstructorsCache.class.getName());
     
     private final ConcurrentMap<String, SoftReference<Constructor<?>>> cache;
 
     
     
-    private ConcurrentConstructorsPool(){
+    public ConcurrentConstructorsCache(){
         cache = new ConcurrentHashMap<String, SoftReference<Constructor<?>>>();
     }
 

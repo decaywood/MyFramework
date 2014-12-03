@@ -92,6 +92,7 @@ public class MongoConnection {
             configReader.read("framework-config.xml");
             doConnect();
         }catch(Exception ex) {
+            ex.printStackTrace();
             logger.info("Can not connect to host " + host);
         }
     }

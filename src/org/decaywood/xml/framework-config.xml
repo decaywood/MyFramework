@@ -23,7 +23,9 @@ dtd地址必须为绝对路径,默认通过classloader寻找相对地址,若需�
         <database-info name="host">localhost</database-info>
         <database-info name="port">27017</database-info>
         <database-info name="password">123456</database-info>
-       
+        <cache type="daosCache" cache-size="500">lru</cache>
+        <cache type="constructorCache">concurrent</cache>
+        <cache type="fieldsCache">lru</cache>
     </user-config>
 </framework-config>
 

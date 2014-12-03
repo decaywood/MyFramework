@@ -7,8 +7,8 @@ import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.annotations.Property;
 import org.decaywood.annotations.Reference;
-import org.decaywood.cache.ConstructorsPool;
-import org.decaywood.cache.DaosPool;
+import org.decaywood.cache.ConstructorsCache;
+import org.decaywood.cache.DaosCache;
 import org.decaywood.dao.ToolDao;
 import org.decaywood.utils.AccessUtil;
 
@@ -50,7 +50,7 @@ public class ReferenceDecoder extends AbstractDecoder{
         Reference annotation = field.getAnnotation(Reference.class);
         String referenceID = AccessUtil.fromDBReference(annotation, value);
         Class<?> implementClass = getImplementClass(annotation, field.getType());
-        ToolDao<?> dao = DaosPool.getInstance().get(implementClass);
+        ToolDao<?> dao = DaosCache.getInstance().get(implementClass);
         return (EntityDefinition) dao.findOne(referenceID);
     }
     
@@ -59,7 +59,7 @@ public class ReferenceDecoder extends AbstractDecoder{
             Reference annotation = field.getAnnotation(Reference.class);
             String referenceID = AccessUtil.fromDBReference(annotation, value);
             Class<?> implementClass = getImplementClass(annotation, field.getType());
-            EntityDefinition entity = (EntityDefinition) ConstructorsPool.getInstance().get(implementClass).newInstance();
+            EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(implementClass).newInstance();
             entity.setId(referenceID);
             return entity;
         } catch (Exception e) {

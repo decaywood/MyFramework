@@ -49,8 +49,14 @@ public enum GlobalName {
     OPTIONS_NAME_HEARTBEAT_CONNECT_TIMEOUT("heartbeatConnectTimeout"),
     OPTIONS_NAME_HEART_BEAT_SOCKET_TIMEOUT("heartbeatSocketTimeout"),
     OPTIONS_NAME_ACCEPT_LATENCY_DIFFERENCE("acceptableLatencyDifference"),
-    OPTIONS_NAME_REQ_REPLICA_SET_NAME("requiredReplicaSetName");
+    OPTIONS_NAME_REQ_REPLICA_SET_NAME("requiredReplicaSetName"),
      
+    CACHE("cache"),
+    CACHE_TYPE("type"),
+    CACHE_SIZE("cache-size"),
+    CACHE_TYPE_DAOS_CACHE("daosCache"),
+    CACHE_TYPE_CONSTRUCTORS_CACHE("constructorCache"),
+    CACHE_TYPE_FIELDS_CACHE("fieldsCache");
     
     private static Map<String, GlobalName> globalNameMap;
     

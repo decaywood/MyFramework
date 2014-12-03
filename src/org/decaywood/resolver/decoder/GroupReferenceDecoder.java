@@ -11,8 +11,8 @@ import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.MongoDBconstant;
 import org.decaywood.annotations.GroupReference;
-import org.decaywood.cache.ConstructorsPool;
-import org.decaywood.cache.DaosPool;
+import org.decaywood.cache.ConstructorsCache;
+import org.decaywood.cache.DaosCache;
 import org.decaywood.dao.ToolDao;
 import org.decaywood.query.IQuery;
 import org.decaywood.utils.AccessUtil;
@@ -75,9 +75,9 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
         try {
             valueClass = getComponentImplementClass(annotation, valueClass);
             Class<?> mapClazz = getMapImplementClass();
-            Map<Object, Object> result = (Map<Object, Object>) ConstructorsPool.getInstance().get(mapClazz).newInstance();
+            Map<Object, Object> result = (Map<Object, Object>) ConstructorsCache.getInstance().get(mapClazz).newInstance();
             Map<?, ?> map = (Map<?, ?>)value;
-            ToolDao<?> dao = DaosPool.getInstance().get(valueClass);
+            ToolDao<?> dao = DaosCache.getInstance().get(valueClass);
             for(Object key : map.keySet()){
                 Object item = map.get(key);
                 if(item == null){
@@ -102,7 +102,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
             valueClass = getComponentImplementClass(annotation, valueClass);
             Class<?> mapClazz = getMapImplementClass();
             Map<?, ?> map = (Map<?, ?>)value;
-            Map<Object, Object> result = (Map<Object, Object>) ConstructorsPool.getInstance().get(mapClazz).newInstance();
+            Map<Object, Object> result = (Map<Object, Object>) ConstructorsCache.getInstance().get(mapClazz).newInstance();
             for(Object key : map.keySet()){
                 Object value = map.get(key);
                 if(value == null){
@@ -110,7 +110,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                     continue;
                 }
                 String referenceID = AccessUtil.fromDBReference(annotation, value);
-                EntityDefinition entity = (EntityDefinition) ConstructorsPool.getInstance().get(valueClass).newInstance();
+                EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(valueClass).newInstance();
                 entity.setId(referenceID);
                 result.put(key, entity);
             }
@@ -129,7 +129,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
             
             Class<?> implementClass = getComponentImplementClass(annotation, componentClass);
             Class<?> collectionImplClass = (Class<?>) getCollectionImplementClass();
-            Collection<?> result = (Collection<EntityDefinition>) ConstructorsPool.getInstance().get(collectionImplClass).newInstance();
+            Collection<?> result = (Collection<EntityDefinition>) ConstructorsCache.getInstance().get(collectionImplClass).newInstance();
             Collection<Object> collection = (Collection<Object>)value;
             List<String> idList = new ArrayList<String>();
             for(Object item : collection){
@@ -137,7 +137,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                 idList.add(referenceID);
             }
             
-            ToolDao<?> dao = DaosPool.getInstance().get(implementClass);
+            ToolDao<?> dao = DaosCache.getInstance().get(implementClass);
             IQuery<?> query = dao.query().in(MongoDBconstant.ID, idList);
             
             String orderBy = annotation.sort();
@@ -155,7 +155,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
         try {
             Class<?> implementClass = getComponentImplementClass(annotation, componentClass);
             Class<?> collectionImplClass = getCollectionImplementClass();
-            Collection<EntityDefinition> result = (Collection<EntityDefinition>) ConstructorsPool.getInstance().get(collectionImplClass).newInstance();
+            Collection<EntityDefinition> result = (Collection<EntityDefinition>) ConstructorsCache.getInstance().get(collectionImplClass).newInstance();
             Collection<Object> collection = (Collection<Object>)value;
             for(Object item : collection){
                 if(item == null){
@@ -163,7 +163,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                     continue;
                 }
                 String referenceID = AccessUtil.fromDBReference(annotation, item);
-                EntityDefinition entity = (EntityDefinition) ConstructorsPool.getInstance().get(implementClass).newInstance();
+                EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(implementClass).newInstance();
                 entity.setId(referenceID);
                 result.add(entity);
             }
@@ -177,7 +177,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
     
     protected Object getReferenceArray(Class<?> componentClass){
         Class<?> implementClass = getComponentImplementClass(annotation, componentClass);
-        ToolDao<?> dao = DaosPool.getInstance().get(implementClass);
+        ToolDao<?> dao = DaosCache.getInstance().get(implementClass);
         List<?> list = (List<?>) value;
         List<String> IDList = new ArrayList<String>();
         for(Object item : list){
@@ -212,7 +212,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                     continue;
                 }
                 String referenceID = AccessUtil.fromDBReference(annotation, item);
-                EntityDefinition entity = (EntityDefinition) ConstructorsPool.getInstance().get(implementClass).newInstance();
+                EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(implementClass).newInstance();
                 entity.setId(referenceID);
                 Array.set(array, index, entity);
             }

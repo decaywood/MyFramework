@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import org.decaywood.annotations.GroupReference;
 import org.decaywood.annotations.ID;
 import org.decaywood.annotations.Reference;
-import org.decaywood.cache.FieldsPool;
+import org.decaywood.cache.FieldsCache;
 
 import com.mongodb.DBRef;
 
@@ -35,7 +35,7 @@ public class AccessUtil {
     private static Object convertToManualRef(Class<?> clazz, String IDString){
         Object result = null;
         try{
-            Field idField = FieldsPool.getInstance().getIdField(clazz);
+            Field idField = FieldsCache.getInstance().getIdField(clazz);
             ID idAnnotation = idField.getAnnotation(ID.class);
             result = idAnnotation.type().getConvertedID(IDString);
         }catch(Exception e){
@@ -60,7 +60,7 @@ public class AccessUtil {
     private static ID getIDAnnotation(Class<?> clazz){
         Field idField = null;
         try {
-            idField = FieldsPool.getInstance().getIdField(clazz);
+            idField = FieldsCache.getInstance().getIdField(clazz);
         } catch (Exception e) {
             log.info(e.getMessage());
         }
@@ -105,7 +105,7 @@ public class AccessUtil {
         Object result = null;
         Field field = null;
         try{
-            field = FieldsPool.getInstance().getField(clazz, fieldName);
+            field = FieldsCache.getInstance().getField(clazz, fieldName);
         }catch(Exception e){
             log.info(e.getMessage());
         }
