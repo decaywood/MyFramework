@@ -1,4 +1,4 @@
-package org.decaywood.constant;
+package org.decaywood;
 
 /**
  * 

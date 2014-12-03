@@ -2,8 +2,8 @@ package org.decaywood.dao;
 
 import java.util.List;
 
+import org.decaywood.MongoDBconstant;
 import org.decaywood.annotations.ID;
-import org.decaywood.constant.MongoDBconstant;
 import org.decaywood.utils.MappingUtil;
 
 import com.mongodb.BasicDBObject;

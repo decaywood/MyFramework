@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.logging.Logger;
 
+import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.MongoConnection;
+import org.decaywood.MongoDBconstant;
 import org.decaywood.annotations.Entity;
 import org.decaywood.annotations.GroupReference;
 import org.decaywood.annotations.ID;
 import org.decaywood.annotations.Reference;
 import org.decaywood.annotations.Split;
 import org.decaywood.cache.FieldsPool;
-import org.decaywood.constant.Annotations;
-import org.decaywood.constant.MongoDBconstant;
 import org.decaywood.listener.CreateListener;
 import org.decaywood.listener.DeleteListener;
 import org.decaywood.listener.ListenerDef;
@@ -160,9 +160,9 @@ public class BasicDao<T> implements DaoDef<T>{
 
     @Override
     public void notifyCreate(final EntityDefinition entity) {
-        Executor manager = ThreadManager.getInstance().getExecutor();
+        Executor executor = ThreadManager.getInstance().getExecutor();
         for(final ListenerDef listener : listenerList){
-           manager.execute(new Runnable() {
+           executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     listener.createAction(entity);
@@ -173,9 +173,9 @@ public class BasicDao<T> implements DaoDef<T>{
 
     @Override
     public void notifyRetrieve(final EntityDefinition entity) {
-        Executor manager = ThreadManager.getInstance().getExecutor();
+        Executor executor = ThreadManager.getInstance().getExecutor();
         for(final ListenerDef listener : listenerList){
-           manager.execute(new Runnable() {
+           executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     listener.retrieveAction(entity); 
@@ -186,9 +186,9 @@ public class BasicDao<T> implements DaoDef<T>{
 
     @Override
     public void notifyUpdated(final EntityDefinition entity) {
-        Executor manager = ThreadManager.getInstance().getExecutor();
+        Executor executor = ThreadManager.getInstance().getExecutor();
         for(final ListenerDef listener : listenerList){
-           manager.execute(new Runnable() {
+           executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     listener.updateAction(entity);;
@@ -199,9 +199,9 @@ public class BasicDao<T> implements DaoDef<T>{
 
     @Override
     public void notifyDeleted(final EntityDefinition entity) {
-        Executor manager = ThreadManager.getInstance().getExecutor();
+        Executor executor = ThreadManager.getInstance().getExecutor();
         for(final ListenerDef listener : listenerList){
-           manager.execute(new Runnable() {
+           executor.execute(new Runnable() {
                 @Override
                 public void run() {
                     listener.deleteAction(entity); 

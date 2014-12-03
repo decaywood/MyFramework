@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javax.net.SocketFactory;
 
 import org.decaywood.cache.ConstructorsPool;
-import org.decaywood.constant.GlobalName;
 import org.decaywood.utils.ConfigureUtil;
 import org.decaywood.utils.ReaderCreater;
 import org.decaywood.utils.ReflectUtil;

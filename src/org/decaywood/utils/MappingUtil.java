@@ -6,14 +6,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.decaywood.Annotations;
+import org.decaywood.MongoDBconstant;
 import org.decaywood.annotations.Embed;
 import org.decaywood.annotations.GroupEmbed;
 import org.decaywood.annotations.Entity;
 import org.decaywood.annotations.Property;
 import org.decaywood.cache.ConstructorsPool;
 import org.decaywood.cache.FieldsPool;
-import org.decaywood.constant.Annotations;
-import org.decaywood.constant.MongoDBconstant;
 import org.decaywood.resolver.DecodeManager;
 import org.decaywood.resolver.EncodeManager;
 import org.decaywood.resolver.decoder.AbstractDecoder;

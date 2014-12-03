@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.annotations.GroupReference;
 import org.decaywood.cache.DaosPool;
-import org.decaywood.constant.Annotations;
 import org.decaywood.dao.BasicDao;
 import org.decaywood.utils.AccessUtil;
 import org.decaywood.utils.MappingUtil;

@@ -1,22 +1,27 @@
 package org.decaywood.cache;
 
-import java.lang.ref.SoftReference;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import org.decaywood.dao.ToolDao;
 
+ 
+
+
 /**
- * 2014年10月31日
+ * 2014年12月3日
  * @author decaywood
  *
  */
-public class DaosPool<T> {
-
+public class DaosPool {
     
-private final ConcurrentMap<String, SoftReference<ToolDao<?>>> cache;
+    DaosPoolDefinition cache;
     
-    private static class InnerClass<T> {
+    public static interface DaosPoolDefinition{
+        public ToolDao get(Class clazz);
+    }
+    
+    
+    public DaosPool() {}
+    
+    private static class InnerClass {
         final static DaosPool instance = new DaosPool();
     } 
     
@@ -24,19 +29,8 @@ private final ConcurrentMap<String, SoftReference<ToolDao<?>>> cache;
         return InnerClass.instance;
     }
     
-    private DaosPool(){
-        cache = new ConcurrentHashMap<String, SoftReference<ToolDao<?>>>();
+    public ToolDao get(Class clazz){
+        return cache.get(clazz);
     }
-    
-    public ToolDao<T> get(Class<?> clazz){
-        String name = clazz.getName();
-        SoftReference<ToolDao<?>> softReference = cache.get(name);
-        if(softReference != null)
-            return (ToolDao<T>)softReference.get();
-        ToolDao<?> dao = new ToolDao<>(clazz);
-        softReference = new SoftReference<ToolDao<?>>(dao);
-        SoftReference<ToolDao<?>> temp = cache.putIfAbsent(name, softReference);
-        return (ToolDao<T>) (temp != null ? temp.get() : softReference.get()); 
-       
-    }
+
 }

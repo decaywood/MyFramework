@@ -3,12 +3,12 @@ package org.decaywood.resolver.decoder;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import org.decaywood.Annotations;
 import org.decaywood.EntityDefinition;
 import org.decaywood.annotations.Property;
 import org.decaywood.annotations.Reference;
 import org.decaywood.cache.ConstructorsPool;
 import org.decaywood.cache.DaosPool;
-import org.decaywood.constant.Annotations;
 import org.decaywood.dao.ToolDao;
 import org.decaywood.utils.AccessUtil;
 

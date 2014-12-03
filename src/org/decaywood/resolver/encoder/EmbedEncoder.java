@@ -1,7 +1,7 @@
 package org.decaywood.resolver.encoder;
 
+import org.decaywood.Annotations;
 import org.decaywood.annotations.Embed;
-import org.decaywood.constant.Annotations;
 import org.decaywood.utils.MappingUtil;
 
 /**

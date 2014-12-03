@@ -1,7 +1,7 @@
 package org.decaywood.resolver.decoder;
 
+import org.decaywood.Annotations;
 import org.decaywood.annotations.Property;
-import org.decaywood.constant.Annotations;
 
 /**
  * 2014年11月2日

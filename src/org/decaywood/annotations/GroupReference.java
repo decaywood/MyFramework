@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.decaywood.constant.Annotations;
+import org.decaywood.Annotations;
 
 /**
  * 

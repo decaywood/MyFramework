@@ -3,8 +3,8 @@ package org.decaywood.resolver.encoder;
 import java.util.Collection;
 import java.util.Map;
 
+import org.decaywood.Annotations;
 import org.decaywood.annotations.GroupReference;
-import org.decaywood.constant.Annotations;
 
 /**
  * 2014年11月21日
