@@ -1,10 +1,10 @@
 DecayMongo设计文档
 ====================================
-        DecayMongo是一个轻量级的MongoDB框架，旨在封装MongoDB驱动，让开发者可以更好的用面向对象思维操纵MongoDB数据库。
-    这篇文档主要介绍DecayMongo的主要功能，技术细节也将在不久的将来进行开源，还有很多功能处于未实现和不成熟的状态，
-    但是基本的对象映射和Xml属性配置特性已经实现。DecayMongo是一个有野心的项目，未来它将集成一个强大的高性能并发
-    框架，让无锁并发成为可能，在实际应用中，DecayMongo将成为理想的数据缓冲层和数据访问层。目前DecayMongo项目还
-    需要大量的单元测试以及集成测试，希望志同道合的朋友能够一起参与！
+        DecayMongo是一个轻量级的MongoDB框架，旨在封装MongoDB驱动，让开发者可以更好的用面向对象思维操纵MongoDB数
+    据库。这篇文档主要介绍DecayMongo的主要功能，技术细节也将在不久的将来进行开源，还有很多功能处于未实现和不成熟
+    的状态，但是基本的对象映射和Xml属性配置特性已经实现。DecayMongo是一个有野心的项目，未来它将集成一个强大的高性
+    能并发框架，让无锁并发成为可能，在实际应用中，DecayMongo将成为理想的数据缓冲层和数据访问层。目前DecayMongo项目
+    还需要大量的单元测试以及集成测试，希望志同道合的朋友能够一起参与！
 # 连接MongoDB
         本节将介绍DecayMongo与MongoDB进行连接的方法，假定你已经配置好MongoDB的使用环境，如果没有配置好请先配置好
     MongoDB数据库环境。DecayMongo与MongoDB进行连接是XML进行参数配置的，利用XML配置参数的有点是若有参数修改可以
@@ -131,8 +131,8 @@ DecayMongo设计文档
         AUTO_INCREASE：ID自增长（暂未实现）。
         USER_DEFINE：用户定义。
     Start：如果使用type=IdType.AUTO_INCREASE，那么还可以设置start参数，使得id从指定的值开始增长。
-        映射到MongoDB中的_id。@Id属性在Java代码中必须为String类型，但其在MongoDB中的数据类型，则根据对@Id的type属性
-    的设置而定。
+        映射到MongoDB中的_id。@Id属性在Java代码中必须为String类型，但其在MongoDB中的数据类型，
+    则根据对@Id的type属性的设置而定。
 #### Property--基本类型注解
 ##### 注解信息：
     public @interface Property
