@@ -230,3 +230,4 @@ DecayMongo设计文档
       标记为Reference注解，表示该域是一个引用类型，类似于关系型数据库中的外键。groupClass指集合实现类
     （即Collection或者Map接口的实现类），若集合不是数组，则此属性必须填写，否则报错。
 
+ 
