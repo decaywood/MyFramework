@@ -1,17 +1,18 @@
 DecayMongo设计文档
 ====================================
-        DecayMongo是一个轻量级的MongoDB框架，旨在封装MongoDB驱动，让开发者可以更好的用面向对象思维操纵MongoDB数
-    据库。这篇文档主要介绍DecayMongo的主要功能，技术细节也将在不久的将来进行开源，还有很多功能处于未实现和不成熟
-    的状态，但是基本的对象映射和Xml属性配置特性已经实现。DecayMongo是一个有野心的项目，未来它将集成一个强大的高性
-    能并发框架，让无锁并发成为可能，在实际应用中，DecayMongo将成为理想的数据缓冲层和数据访问层。目前DecayMongo项目
-    还需要大量的单元测试以及集成测试，希望志同道合的朋友能够一起参与！
+        DecayMongo是一个轻量级的MongoDB框架，旨在封装MongoDB驱动，让开发者可以更好的用面向对象思维操纵
+    MongoDB数据库。这篇文档主要介绍DecayMongo的主要功能，技术细节也将在不久的将来进行开源，还有很多功能
+    处于未实现和不成熟的状态，但是基本的对象映射和Xml属性配置特性已经实现。DecayMongo是一个有野心的项目，
+    未来它将集成一个强大的高性能并发框架，让无锁并发成为可能，在实际应用中，DecayMongo将成为理想的数据缓
+    冲层和数据访问层。目前DecayMongo项目还需要大量的单元测试以及集成测试，希望志同道合的朋友能够一起参与！
 # 连接MongoDB
-        本节将介绍DecayMongo与MongoDB进行连接的方法，假定你已经配置好MongoDB的使用环境，如果没有配置好请先配置好
-    MongoDB数据库环境。DecayMongo与MongoDB进行连接是XML进行参数配置的，利用XML配置参数的有点是若有参数修改可以
-    不用重新编译代码，只需修改XML文件即可，下面将介绍DecayMongo的各个XML参数以及在Java中如何连接MongoDB。
+        本节将介绍DecayMongo与MongoDB进行连接的方法，假定你已经配置好MongoDB的使用环境，如果没有配置好请先
+    配置好MongoDB数据库环境。DecayMongo与MongoDB进行连接是XML进行参数配置的，利用XML配置参数的有点是若有参
+    数修改可以不用重新编译代码，只需修改XML文件即可，下面将介绍DecayMongo的各个XML参数以及在Java中如何连接
+    MongoDB。
 ## 配置XML
-        连接MongoDB所需要的一些基本配置都可以通过XML配置完成。大致可以包括数据库访问参数、数据库运行参数、缓存类
-    型参数。XML配置树示例如下：
+        连接MongoDB所需要的一些基本配置都可以通过XML配置完成。大致可以包括数据库访问参数、数据库运行参数
+    、缓存类型参数。XML配置树示例如下：
     <framework-config>
       <user-config name = "decaywood">
        <database-info name="databaseName">test</database-info>
@@ -72,27 +73,27 @@ DecayMongo设计文档
     有两个：MongoConnection以及DaosCache，MongoConnection主要负责与MongoDB进行连接以及将XML配置初始化至MongoDB。
     DaosCache则会生成需要持久化的类的对应的数据访问对象。通过这个对象就可以完成这个持久化类所属实例的增删改查。
 ### MongoConnection
-        MongoConnection类持有三个重要的类的实例，分别为：MongoClient、MongoClientOptions、DB，三个类的作用可以概括
-    为对MongoDB进行交互、配置。而MongoConnection则是对这些功能进行进一步的封装。如刚才介绍的，MongoConnection
-    主要作用是将XML配置信息设置到MongoDB中，具体细节为通过一个配置解析类ConfigReader读取XML信息，并进行组织提取，
-    完成这一步后通过回调MongoConnection把信息通过MongoClientOptions进行配置。之后进行用户验证，随即生成MongoClient
-    实例进而获取DB实例。
+        MongoConnection类持有三个重要的类的实例，分别为：MongoClient、MongoClientOptions、DB，三个类的
+    作用可以概括为对MongoDB进行交互、配置。而MongoConnection则是对这些功能进行进一步的封装。如刚才介绍的，
+    MongoConnection主要作用是将XML配置信息设置到MongoDB中，具体细节为通过一个配置解析类ConfigReader读
+    取XML信息，并进行组织提取，完成这一步后通过回调MongoConnection把信息通过MongoClientOptions进行配置。
+    之后进行用户验证，随即生成MongoClient实例进而获取DB实例。
         DB实例是数据交互的核心，它被数据访问对象通过MongoConnection间接持有。就像前面提到的，数据访问对象由
     DaosCache生成。
 ### DaosCache
-    DaosCache类是一个缓存类，它对数据访问对象进行缓存，每一个实现了EntityDefinition对象的类在进行数据库操作时都
-    会被DaosCache所缓存，具体的缓存策略由用户通过XML进行配置。
+        DaosCache类是一个缓存类，它对数据访问对象进行缓存，每一个实现了EntityDefinition对象的类在进行数据库
+        操作时都会被DaosCache所缓存，具体的缓存策略由用户通过XML进行配置。
 # 对象文档映射
-    在对象(Object，也称实体Entity)、文档(Document)之间实现自动转换，是DecayMongo的最核心功能，这能让你直接用面向
-    对象的概念来操作MongoDB数据库，而不用去关心底层的数据库细节。
+        在对象(Object，也称实体Entity)、文档(Document)之间实现自动转换，是DecayMongo的最核心功能，
+    这能让你直接用面向对象的概念来操作MongoDB数据库，而不用去关心底层的数据库细节。
 ## EntityDefinition接口
-    要使得某个Java实体能和MongoDB Document实现相互转换，该实体需要实现EntityDefinition接口，该接口中有2个方法，
-    如下：
+        要使得某个Java实体能和MongoDB Document实现相互转换，该实体需要实现EntityDefinition接口，
+    该接口中有2个方法如下：
     public void setID(String id);
     public String getID();
 ## 注解
-    DecayMongo是基于注解机制进行对象-数据转换的，通过注解标记，利用反射机制将目标对象转换为MongoDB可以识别的
-    Document格式。DecayMongo中的注解氛围两类--域注解以及类注解
+        DecayMongo是基于注解机制进行对象-数据转换的，通过注解标记，利用反射机制将目标对象转换为MongoDB可以
+    识别的Document格式。DecayMongo中的注解氛围两类--域注解以及类注解
 ### 类注解
     被类注解标记的对象将被映射到MongoDB中，对应的被注解标记的域在MongoDB中将有对应的数据结构。
 #### Entity--DecayMongo持久化对象标记注解
@@ -114,11 +115,12 @@ DecayMongo设计文档
     capSize：long型，设置Capped Collection的大小。
     capMax：long型，设置Capped Collection的最多能存储多少个document。如果设置了capped=true，
     则需要设置capSize和capMax两者中的其中一个。
-    类注解只有Entity一个，所有需要进行持久化的类必须标记该注解，相应的，类中需要持久化的域也需要标记对应的注解。
+        类注解只有Entity一个，所有需要进行持久化的类必须标记该注解，相应的，类中需要持久化的域也需要标记
+    对应的注解。
 ### 域注解
-        域注解即标记在域上的注解，它可以标识域的类型以及在MongoDB中希望存储成的数据格式。域注解在DecayMongo中不是
-    必须的，所有未标记域注解的域默认忽略（暂未在代码中定义，现版本默认为@Property）。下面，将一一介绍DecayMongo
-    中的各个注解的作用。
+        域注解即标记在域上的注解，它可以标识域的类型以及在MongoDB中希望存储成的数据格式。域注解在
+    DecayMongo中不是必须的，所有未标记域注解的域默认忽略（暂未在代码中定义，现版本默认为@Property）。
+    下面，将一一介绍DecayMongo中的各个注解的作用。
 #### ID--实体ID注解
 ##### 注解信息：
     public @interface ID
@@ -140,10 +142,11 @@ DecayMongo设计文档
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
 ###### 2、属性：
-    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity的Field相同的名称。
+    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity
+    的Field相同的名称。
     Lazy：Boolean型，含义是：取出该实体的列表时，是否取出该field值。如果为true，表示不取出。默认值为false。
-    该注解可以省略。它用来映射基本数据类型，包括：String、int、long、short、byte、float、double、boolean、char、Date、
-    Timestamp等，以及这些基本数据类型组成的数组、List、Set、Map。
+    该注解可以省略。它用来映射基本数据类型，包括：String、int、long、short、byte、float、double、boolean、
+    char、Date、Timestamp等，以及这些基本数据类型组成的数组、List、Set、Map。
 #### Ignore--忽略注解
 ##### 注解信息：
     public @interface Ignore
@@ -160,8 +163,10 @@ DecayMongo设计文档
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
 ###### 2、属性：
-    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity的Field相同的名称。
-    Lazy：Boolean型，含义是：取出该实体的列表时，是否取出该field值。如果为true，表示不取出。默认值为false。
+    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity
+    的Field相同的名称。
+    Lazy：Boolean型，含义是：取出该实体的列表时，是否取出该field值。如果为true，表示不取出。
+    默认值为false。
         标记为Embed注解，表示该域是一个嵌入的对象。嵌入对象只是一个普通的POJO，不需要@Entity注解，不需要实现
     EntityDefinition接口，也不需要有@Id。DecayMongo将会让Java对象持久化为MongoDB中的内嵌形文档。
 #### GroupEmbed--内嵌格式集合注解
@@ -171,12 +176,16 @@ DecayMongo设计文档
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
 ###### 2、属性：
-    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity的Field相同的名称。
-    Lazy：Boolean型，含义是：取出该实体的列表时，是否取出该field值。如果为true，表示不取出。默认值为false。
-    groupClass指集合实现类（即Collection或者Map接口的实现类），若集合不是数组，则此属性必须填写，否则报错。
-    标记为GroupEmbed注解，表示该域是一组嵌入的对象。GroupEmbed注解支持数组、Collection接口、Map接口，但都必须使用
-    泛型。当使用Map的时候，嵌入对象只能作为Map的value，而不能作为key。注意：和Embed一样，嵌入的对象都必须是自己定
-    义的Java对象。如果是原始数据类型组成的Collection、Map等，请使用@Property，而不是@EmbedList。跟@Property一样。
+    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity
+    的Field相同的名称。
+    Lazy：Boolean型，含义是：取出该实体的列表时，是否取出该field值。如果为true，表示不取出。
+    默认值为false。
+    groupClass指集合实现类（即Collection或者Map接口的实现类），若集合不是数组，则此属性必须填写，
+    否则报错。
+        标记为GroupEmbed注解，表示该域是一组嵌入的对象。GroupEmbed注解支持数组、Collection接口、Map接口，
+    但都必须使用泛型。当使用Map的时候，嵌入对象只能作为Map的value，而不能作为key。注意：和Embed一样，
+    嵌入的对象都必须是自己定义的Java对象。如果是原始数据类型组成的Collection、Map等，请使用@Property，
+    而不是@EmbedList。跟@Property一样。
 #### Reference--引用注解
 ##### 注解信息：
     public @interface Reference 
@@ -184,9 +193,10 @@ DecayMongo设计文档
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
 ###### 2、属性：
-    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity的Field相同的名称。
-    Cascade：int类型，用于指定关联操作，所谓关联，就是如果有设置为Reference标记的域的话，含有该域的持久对象进行增删改
-    查操作时，该域会对其行为采取对应的措施。Cascade有五种类型可选：
+    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，
+    表示采用与Entity的Field相同的名称。
+    Cascade：int类型，用于指定关联操作，所谓关联，就是如果有设置为Reference标记的域的话，
+    含有该域的持久对象进行增删改查操作时，该域会对其行为采取对应的措施。Cascade有五种类型可选：
         CASCADE_DEFAULT表示不进行关联操作。
         CASCADE_CREATE表示插入对象时若该域还未持久化到数据库则将该域对象进行持久化。
         CASCADE_RETRIEVE表示查询时会关联取出该域表示的对象。
@@ -203,9 +213,10 @@ DecayMongo设计文档
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
 ###### 2、属性：
-    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，表示采用与Entity的Field相同的名称。
-    Cascade：int类型，用于指定关联操作，所谓关联，就是如果有设置为Reference标记的域的话，含有该域的持久对象进行增删改
-    查操作时，该域会对其行为采取对应的措施。Cascade有五种类型可选：
+    Name：String型，用于指定映射到MongoDB collection中某个field。属性name可以省略，
+    表示采用与Entity的Field相同的名称。
+    Cascade：int类型，用于指定关联操作，所谓关联，就是如果有设置为Reference标记的域的话，
+    含有该域的持久对象进行增删改查操作时，该域会对其行为采取对应的措施。Cascade有五种类型可选：
         CASCADE_DEFAULT表示不进行关联操作。
         CASCADE_CREATE表示插入对象时若该域还未持久化到数据库则将该域对象进行持久化。
         CASCADE_RETRIEVE表示查询时会关联取出该域表示的对象。
