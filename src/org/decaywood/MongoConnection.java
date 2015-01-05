@@ -17,7 +17,7 @@ import com.mongodb.ServerAddress;
  * 2014年10月26日
  * @author decaywood
  *
- * ConnectionUtils记录了连接数据库所需参数,可看作连接数据库的初始化方法
+ * MongoConnection记录了连接数据库所需参数,可看作连接数据库的初始化方法
  * MongoDB的Java驱动是线程安全的，对于一般的应用，只要一个Mongo实例即可，Mongo有个内置的连接池（池大小默认为10个）。
  * 对于有大量写和读的环境中，为了确保在一个Session中使用同一个DB时，我们可以用以下方式保证一致性：
  * DB mdb = mongo.getDB('dbname');

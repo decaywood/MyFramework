@@ -11,7 +11,7 @@ package org.decaywood;
  */
 public interface EntityDefinition {
     
-    public void setId(String id);
+    public void setID(String id);
     public String getID();
     
 }

@@ -18,7 +18,7 @@ public class BasicTypeChecker {
     private BasicTypeChecker() {
  
         /**
-         * nteger 、Long、Short、Byte、Character、Double、Float、Boolean、BigInteger、BigDecmail
+         * integer 、Long、Short、Byte、Character、Double、Float、Boolean、BigInteger、BigDecmail
          */
         basicTypes = new ArrayList<Class<?>>();
         basicTypes.add(char.class);

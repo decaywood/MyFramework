@@ -60,7 +60,7 @@ public class ReferenceDecoder extends AbstractDecoder{
             String referenceID = AccessUtil.fromDBReference(annotation, value);
             Class<?> implementClass = getImplementClass(annotation, field.getType());
             EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(implementClass).newInstance();
-            entity.setId(referenceID);
+            entity.setID(referenceID);
             return entity;
         } catch (Exception e) {
             e.printStackTrace();

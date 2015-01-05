@@ -32,17 +32,6 @@ public class AccessUtil {
         return result;
     }
     
-    private static Object convertToManualRef(Class<?> clazz, String IDString){
-        Object result = null;
-        try{
-            Field idField = FieldsCache.getInstance().getIdField(clazz);
-            ID idAnnotation = idField.getAnnotation(ID.class);
-            result = idAnnotation.type().getConvertedID(IDString);
-        }catch(Exception e){
-            log.info(e.getMessage());
-        }
-        return result;
-    }
     
     public static Object convertToDbReference(GroupReference groupReference, Class<?> clazz, String idStr){
         if(StringUtil.isEmpty(idStr)){
@@ -57,14 +46,17 @@ public class AccessUtil {
         return result;
     }
     
-    private static ID getIDAnnotation(Class<?> clazz){
-        Field idField = null;
-        try {
-            idField = FieldsCache.getInstance().getIdField(clazz);
-        } catch (Exception e) {
+    
+    private static Object convertToManualRef(Class<?> clazz, String IDString){
+        Object result = null;
+        try{
+            Field idField = FieldsCache.getInstance().getIdField(clazz);
+            ID idAnnotation = idField.getAnnotation(ID.class);
+            result = idAnnotation.type().getConvertedID(IDString);
+        }catch(Exception e){
             log.info(e.getMessage());
         }
-        return idField.getAnnotation(ID.class);
+        return result;
     }
     
     private static DBRef convertToDbReference(Class<?> clazz, String idStr){
@@ -77,6 +69,16 @@ public class AccessUtil {
             log.info(e.getMessage());
         }
         return null;
+    }
+    
+    private static ID getIDAnnotation(Class<?> clazz){
+        Field idField = null;
+        try {
+            idField = FieldsCache.getInstance().getIdField(clazz);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+        return idField.getAnnotation(ID.class);
     }
     
     public static String fromDBReference(Reference ref, Object value){

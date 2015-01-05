@@ -111,7 +111,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                 }
                 String referenceID = AccessUtil.fromDBReference(annotation, value);
                 EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(valueClass).newInstance();
-                entity.setId(referenceID);
+                entity.setID(referenceID);
                 result.put(key, entity);
             }
             return result;
@@ -164,7 +164,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                 }
                 String referenceID = AccessUtil.fromDBReference(annotation, item);
                 EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(implementClass).newInstance();
-                entity.setId(referenceID);
+                entity.setID(referenceID);
                 result.add(entity);
             }
             return result;
@@ -213,7 +213,7 @@ public class GroupReferenceDecoder extends AbstractGroupDecoder {
                 }
                 String referenceID = AccessUtil.fromDBReference(annotation, item);
                 EntityDefinition entity = (EntityDefinition) ConstructorsCache.getInstance().get(implementClass).newInstance();
-                entity.setId(referenceID);
+                entity.setID(referenceID);
                 Array.set(array, index, entity);
             }
             return array;

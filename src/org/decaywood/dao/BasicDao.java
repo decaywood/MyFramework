@@ -216,7 +216,7 @@ public class BasicDao<T> implements DaoDef<T>{
         WriteResult writeResult = collection.insert(dbo, database.getWriteConcern());
         String id = dbo.get(MongoDBconstant.ID).toString();
         EntityDefinition entity = (EntityDefinition)insertObj;
-        entity.setId(id);
+        entity.setID(id);
         notifyCreate(entity);
         return writeResult;
     }
@@ -233,7 +233,7 @@ public class BasicDao<T> implements DaoDef<T>{
         for(int i=0; i<len; i++){
             String id = dbObjects.get(i).get(MongoDBconstant.ID).toString();
             EntityDefinition entity = (EntityDefinition)(list.get(i));
-            entity.setId(id);
+            entity.setID(id);
             notifyCreate(entity);
         }
         return writeResult;
@@ -337,8 +337,8 @@ public class BasicDao<T> implements DaoDef<T>{
     
     private Object convert(String key, Object value){
         if(value instanceof EntityDefinition){
-            EntityDefinition be = (EntityDefinition)value;
-            return AccessUtil.convertToDbReference(clazz, key, be.getClass(), be.getID());
+            EntityDefinition entityDefinition = (EntityDefinition)value;
+            return AccessUtil.convertToDbReference(clazz, key, entityDefinition.getClass(), entityDefinition.getID());
         }
         FieldsCache fieldsCache = FieldsCache.getInstance();
         if(!(value instanceof DBObject) && fieldsCache.isEmbedOrGroupEmbeded(clazz, key)){

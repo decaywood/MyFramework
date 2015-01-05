@@ -68,7 +68,7 @@ public class MongoPojo implements EntityDefinition{
      *
      */ 
     @Override
-    public void setId(String id) {
+    public void setID(String id) {
         this.id = id;
     }
 
