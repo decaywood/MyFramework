@@ -17,7 +17,7 @@ package DecayMongo.disruptor;
 
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-import com.lmax.disruptor.util.Util;
+import DecayMongo.disruptor.util.Util;
 
 /**
  * Base class for the various sequencer types (single/multi).  Provides

@@ -2,15 +2,15 @@ package DecayMongo.resolver;
 
 import java.lang.reflect.Field;
 
-import org.decaywood.resolver.encoder.AbstractEncoder;
-import org.decaywood.resolver.encoder.AbstractEncoder.Initiator;
-import org.decaywood.resolver.encoder.DefaultEncoder;
-import org.decaywood.resolver.encoder.EmbedEncoder;
-import org.decaywood.resolver.encoder.GroupEmbedEncoder;
-import org.decaywood.resolver.encoder.GroupReferenceEncoder;
-import org.decaywood.resolver.encoder.IDEncoder;
-import org.decaywood.resolver.encoder.PropertyEncoder;
-import org.decaywood.resolver.encoder.ReferenceEncoder;
+import DecayMongo.resolver.encoder.AbstractEncoder;
+import DecayMongo.resolver.encoder.AbstractEncoder.Initiator;
+import DecayMongo.resolver.encoder.DefaultEncoder;
+import DecayMongo.resolver.encoder.EmbedEncoder;
+import DecayMongo.resolver.encoder.GroupEmbedEncoder;
+import DecayMongo.resolver.encoder.GroupReferenceEncoder;
+import DecayMongo.resolver.encoder.IDEncoder;
+import DecayMongo.resolver.encoder.PropertyEncoder;
+import DecayMongo.resolver.encoder.ReferenceEncoder;
 
 
 /**

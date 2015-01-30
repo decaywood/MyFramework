@@ -1,8 +1,10 @@
 package DecayMongo.disruptor.dsl;
 
-import com.lmax.disruptor.*;
-
 import java.util.concurrent.Executor;
+
+import DecayMongo.disruptor.Sequence;
+import DecayMongo.disruptor.SequenceBarrier;
+import DecayMongo.disruptor.WorkerPool;
 
 class WorkerPoolInfo<T> implements ConsumerInfo
 {

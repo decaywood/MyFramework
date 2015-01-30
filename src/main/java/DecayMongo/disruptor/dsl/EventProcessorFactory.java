@@ -1,8 +1,8 @@
 package DecayMongo.disruptor.dsl;
 
-import com.lmax.disruptor.EventProcessor;
-import com.lmax.disruptor.RingBuffer;
-import com.lmax.disruptor.Sequence;
+import DecayMongo.disruptor.EventProcessor;
+import DecayMongo.disruptor.RingBuffer;
+import DecayMongo.disruptor.Sequence;
 
 /**
  * A factory interface to make it possible to include custom event processors in a chain:

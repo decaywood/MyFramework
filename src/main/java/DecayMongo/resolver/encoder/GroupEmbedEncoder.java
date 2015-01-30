@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.decaywood.Annotations;
-import org.decaywood.annotations.GroupEmbed;
-import org.decaywood.utils.MappingUtil;
+import DecayMongo.Annotations;
+import DecayMongo.annotations.GroupEmbed;
+import DecayMongo.utils.MappingUtil;
 
 import com.mongodb.DBObject;
 

@@ -1,6 +1,6 @@
 package DecayMongo.listener;
 
-import org.decaywood.EntityDefinition;
+import DecayMongo.EntityDefinition;
 
 
 public interface ListenerDef {

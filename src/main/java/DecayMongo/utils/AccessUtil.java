@@ -3,10 +3,10 @@ package DecayMongo.utils;
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
-import org.decaywood.annotations.GroupReference;
-import org.decaywood.annotations.ID;
-import org.decaywood.annotations.Reference;
-import org.decaywood.cache.FieldsCache;
+import DecayMongo.annotations.GroupReference;
+import DecayMongo.annotations.ID;
+import DecayMongo.annotations.Reference;
+import DecayMongo.cache.FieldsCache;
 
 import com.mongodb.DBRef;
 

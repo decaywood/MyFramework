@@ -1,11 +1,8 @@
 package DecayMongo.utils;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.logging.Logger;
 
-import org.decaywood.resources.ResourcesPathTool;
 import org.dom4j.io.DOMReader;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.Attributes;
@@ -19,6 +16,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
+
+import DecayMongo.resources.ResourcesPathTool;
 
 /**
  * 

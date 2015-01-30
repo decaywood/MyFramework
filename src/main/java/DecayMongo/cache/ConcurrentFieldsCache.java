@@ -7,14 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.logging.Logger;
-
-import org.decaywood.annotations.Embed;
-import org.decaywood.annotations.GroupEmbed;
-import org.decaywood.annotations.GroupReference;
-import org.decaywood.annotations.ID;
-import org.decaywood.annotations.Property;
-import org.decaywood.annotations.Reference;
 
 /**
  * 2014年11月24日

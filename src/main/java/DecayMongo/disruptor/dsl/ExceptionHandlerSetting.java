@@ -15,9 +15,9 @@
  */
 package DecayMongo.disruptor.dsl;
 
-import com.lmax.disruptor.BatchEventProcessor;
-import com.lmax.disruptor.EventHandler;
-import com.lmax.disruptor.ExceptionHandler;
+import DecayMongo.disruptor.BatchEventProcessor;
+import DecayMongo.disruptor.EventHandler;
+import DecayMongo.disruptor.ExceptionHandler;
 
 /**
  * A support class used as part of setting an exception handler for a specific event handler.

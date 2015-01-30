@@ -17,7 +17,7 @@ package DecayMongo.disruptor;
 
 import java.util.concurrent.locks.LockSupport;
 
-import com.lmax.disruptor.util.Util;
+import DecayMongo.disruptor.util.Util;
 
 abstract class SingleProducerSequencerPad extends AbstractSequencer
 {

@@ -2,15 +2,15 @@ package DecayMongo.annotations;
 
 import java.lang.reflect.Field;
 
-import org.decaywood.resolver.IDResolver.AutoGenerateConverter;
-import org.decaywood.resolver.IDResolver.AutoGenerator;
-import org.decaywood.resolver.IDResolver.AutoIncreaseConverter;
-import org.decaywood.resolver.IDResolver.AutoIncreaseGenerator;
-import org.decaywood.resolver.IDResolver.IDConverterDef;
-import org.decaywood.resolver.IDResolver.IDGeneratorDef;
-import org.decaywood.resolver.IDResolver.UserDefineConverter;
-import org.decaywood.resolver.IDResolver.UserDefineGenerator;
-import org.decaywood.utils.StringUtil;
+import DecayMongo.resolver.IDResolver.AutoGenerateConverter;
+import DecayMongo.resolver.IDResolver.AutoGenerator;
+import DecayMongo.resolver.IDResolver.AutoIncreaseConverter;
+import DecayMongo.resolver.IDResolver.AutoIncreaseGenerator;
+import DecayMongo.resolver.IDResolver.IDConverterDef;
+import DecayMongo.resolver.IDResolver.IDGeneratorDef;
+import DecayMongo.resolver.IDResolver.UserDefineConverter;
+import DecayMongo.resolver.IDResolver.UserDefineGenerator;
+import DecayMongo.utils.StringUtil;
 
 /**
  * 

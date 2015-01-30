@@ -1,7 +1,8 @@
 package DecayMongo.resolver.IDResolver;
 
 import org.bson.types.ObjectId;
-import org.decaywood.utils.StringUtil;
+
+import DecayMongo.utils.StringUtil;
 
 /**
  * 

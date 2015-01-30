@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.decaywood.Annotations;
-import org.decaywood.EntityDefinition;
-import org.decaywood.annotations.GroupReference;
-import org.decaywood.cache.DaosCache;
-import org.decaywood.dao.BasicDao;
-import org.decaywood.utils.AccessUtil;
-import org.decaywood.utils.MappingUtil;
+import DecayMongo.Annotations;
+import DecayMongo.EntityDefinition;
+import DecayMongo.annotations.GroupReference;
+import DecayMongo.cache.DaosCache;
+import DecayMongo.dao.BasicDao;
+import DecayMongo.utils.AccessUtil;
+import DecayMongo.utils.MappingUtil;
 
 import com.mongodb.DBObject;
 

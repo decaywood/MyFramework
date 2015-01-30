@@ -2,11 +2,9 @@ package DecayMongo.utils;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
-import org.decaywood.resources.ResourcesPathTool;
-import org.decaywood.xml.XmlPathTool;
+import DecayMongo.xml.XmlPathTool;
 
 /**
  * 

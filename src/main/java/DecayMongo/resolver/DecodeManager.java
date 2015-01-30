@@ -2,23 +2,15 @@ package DecayMongo.resolver;
 
 import java.lang.reflect.Field;
 
-import org.decaywood.resolver.decoder.AbstractDecoder;
-import org.decaywood.resolver.decoder.DecoderDef;
-import org.decaywood.resolver.decoder.AbstractDecoder.Initiator;
-import org.decaywood.resolver.decoder.DefaultDecoder;
-import org.decaywood.resolver.decoder.EmbedDecoder;
-import org.decaywood.resolver.decoder.GroupEmbedDecoder;
-import org.decaywood.resolver.decoder.GroupReferenceDecoder;
-import org.decaywood.resolver.decoder.IDDecoder;
-import org.decaywood.resolver.decoder.PropertyDecoder;
-import org.decaywood.resolver.decoder.ReferenceDecoder;
-import org.decaywood.resolver.encoder.AbstractEncoder;
-import org.decaywood.resolver.encoder.EmbedEncoder;
-import org.decaywood.resolver.encoder.GroupEmbedEncoder;
-import org.decaywood.resolver.encoder.GroupReferenceEncoder;
-import org.decaywood.resolver.encoder.IDEncoder;
-import org.decaywood.resolver.encoder.PropertyEncoder;
-import org.decaywood.resolver.encoder.ReferenceEncoder;
+import DecayMongo.resolver.decoder.AbstractDecoder;
+import DecayMongo.resolver.decoder.AbstractDecoder.Initiator;
+import DecayMongo.resolver.decoder.DefaultDecoder;
+import DecayMongo.resolver.decoder.EmbedDecoder;
+import DecayMongo.resolver.decoder.GroupEmbedDecoder;
+import DecayMongo.resolver.decoder.GroupReferenceDecoder;
+import DecayMongo.resolver.decoder.IDDecoder;
+import DecayMongo.resolver.decoder.PropertyDecoder;
+import DecayMongo.resolver.decoder.ReferenceDecoder;
 
 import com.mongodb.DBObject;
 

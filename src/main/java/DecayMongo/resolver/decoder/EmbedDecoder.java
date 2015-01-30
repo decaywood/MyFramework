@@ -1,8 +1,8 @@
 package DecayMongo.resolver.decoder;
 
-import org.decaywood.Annotations;
-import org.decaywood.annotations.Embed;
-import org.decaywood.utils.MappingUtil;
+import DecayMongo.Annotations;
+import DecayMongo.annotations.Embed;
+import DecayMongo.utils.MappingUtil;
 
 import com.mongodb.DBObject;
 

@@ -1,7 +1,7 @@
 package DecayMongo.cache;
 
-import org.decaywood.dao.ToolDao;
-import org.decaywood.utils.LRUCache;
+import DecayMongo.dao.ToolDao;
+import DecayMongo.utils.LRUCache;
 
 /**
  * 2014年12月3日

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.decaywood.query.IQuery;
-import org.decaywood.utils.MappingUtil;
+import DecayMongo.query.IQuery;
+import DecayMongo.utils.MappingUtil;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;

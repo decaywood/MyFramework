@@ -1,9 +1,9 @@
 package DecayMongo.disruptor.dsl;
 
-import com.lmax.disruptor.Sequence;
-import com.lmax.disruptor.SequenceBarrier;
-
 import java.util.concurrent.Executor;
+
+import DecayMongo.disruptor.Sequence;
+import DecayMongo.disruptor.SequenceBarrier;
 
 interface ConsumerInfo
 {

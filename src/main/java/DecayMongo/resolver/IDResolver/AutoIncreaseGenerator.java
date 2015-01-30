@@ -2,9 +2,9 @@ package DecayMongo.resolver.IDResolver;
 
 import java.lang.reflect.Field;
 
-import org.decaywood.annotations.ID;
-import org.decaywood.cache.DaosCache;
-import org.decaywood.dao.ToolDao;
+import DecayMongo.annotations.ID;
+import DecayMongo.cache.DaosCache;
+import DecayMongo.dao.ToolDao;
 
 
 

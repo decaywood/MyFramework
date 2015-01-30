@@ -1,11 +1,11 @@
 package DecayMongo.resolver.encoder;
 
-import org.decaywood.Annotations;
-import org.decaywood.EntityDefinition;
-import org.decaywood.annotations.Reference;
-import org.decaywood.cache.DaosCache;
-import org.decaywood.dao.BasicDao;
-import org.decaywood.utils.AccessUtil;
+import DecayMongo.Annotations;
+import DecayMongo.EntityDefinition;
+import DecayMongo.annotations.Reference;
+import DecayMongo.cache.DaosCache;
+import DecayMongo.dao.BasicDao;
+import DecayMongo.utils.AccessUtil;
 
 /**
  * 2014年11月1日

@@ -2,9 +2,9 @@ package DecayMongo.dao;
 
 import java.util.List;
 
-import org.decaywood.MongoDBconstant;
-import org.decaywood.annotations.ID;
-import org.decaywood.utils.MappingUtil;
+import DecayMongo.MongoDBconstant;
+import DecayMongo.annotations.ID;
+import DecayMongo.utils.MappingUtil;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;

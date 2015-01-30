@@ -3,12 +3,12 @@ package DecayMongo.cache;
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
-import org.decaywood.annotations.Embed;
-import org.decaywood.annotations.GroupEmbed;
-import org.decaywood.annotations.GroupReference;
-import org.decaywood.annotations.ID;
-import org.decaywood.annotations.Property;
-import org.decaywood.annotations.Reference;
+import DecayMongo.annotations.Embed;
+import DecayMongo.annotations.GroupEmbed;
+import DecayMongo.annotations.GroupReference;
+import DecayMongo.annotations.ID;
+import DecayMongo.annotations.Property;
+import DecayMongo.annotations.Reference;
 
 
 /**

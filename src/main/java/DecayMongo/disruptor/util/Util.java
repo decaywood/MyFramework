@@ -22,9 +22,8 @@ import java.security.AccessController;
 import java.security.PrivilegedExceptionAction;
 
 import sun.misc.Unsafe;
-
-import com.lmax.disruptor.EventProcessor;
-import com.lmax.disruptor.Sequence;
+import DecayMongo.disruptor.EventProcessor;
+import DecayMongo.disruptor.Sequence;
 
 /**
  * Set of common functions used by the Disruptor

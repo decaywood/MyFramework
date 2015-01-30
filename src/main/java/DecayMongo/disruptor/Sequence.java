@@ -16,8 +16,7 @@
 package DecayMongo.disruptor;
 
 import sun.misc.Unsafe;
-
-import com.lmax.disruptor.util.Util;
+import DecayMongo.disruptor.util.Util;
 
 
 class LhsPadding

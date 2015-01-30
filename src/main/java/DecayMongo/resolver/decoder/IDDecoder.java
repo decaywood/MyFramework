@@ -1,7 +1,7 @@
 package DecayMongo.resolver.decoder;
 
-import org.decaywood.MongoDBconstant;
-import org.decaywood.annotations.ID;
+import DecayMongo.MongoDBconstant;
+import DecayMongo.annotations.ID;
 
 /**
  * 2014年11月2日

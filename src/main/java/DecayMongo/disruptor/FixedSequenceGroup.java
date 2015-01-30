@@ -17,7 +17,7 @@ package DecayMongo.disruptor;
 
 import java.util.Arrays;
 
-import com.lmax.disruptor.util.Util;
+import DecayMongo.disruptor.util.Util;
 
 /**
  * Hides a group of Sequences behind a single Sequence

@@ -1,6 +1,6 @@
 package DecayMongo.resolver.IDResolver;
 
-import org.decaywood.utils.StringUtil;
+import DecayMongo.utils.StringUtil;
 
 /**
  * 2014年10月29日

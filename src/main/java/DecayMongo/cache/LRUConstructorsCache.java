@@ -3,7 +3,7 @@ package DecayMongo.cache;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
-import org.decaywood.utils.LRUCache;
+import DecayMongo.utils.LRUCache;
 
 /**
  * 2014年12月3日
