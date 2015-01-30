@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src.main.java"/>
+	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/Work/WorkSpace/DecayMongo/lib/mongo-java-driver-2.13.0-rc0.jar" sourcepath="D:/Work/WorkSpace/DecayMongo/lib/mongo-java-driver-2.13.0-rc0-sources.jar"/>
-	<classpathentry kind="lib" path="D:/Work/WorkSpace/DecayMongo/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
